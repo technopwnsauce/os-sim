@@ -1,0 +1,37 @@
+/*
+ * HighLevelScheduler.cpp
+ *
+ *  Created on: Mar 22, 2016
+ *      Author: Brett
+ */
+
+#include "HighLevelScheduler.h"
+
+bool newJobAdmissionStatus; // Indicates whether a new job will be admitted? (T=Admit, F=No Admit)
+std::string entityStatus; // Indicates whether entity is (Job/Process/Terminated)
+// used to decide process admission
+int processPriority; // Process priority
+int expectedExecutionTime; // Expected execution time
+int ioLevel; // Integer rating of process's level of I/O utilization
+
+HighLevelScheduler::HighLevelScheduler()
+{
+	// TODO Auto-generated constructor stub
+}
+
+HighLevelScheduler::~HighLevelScheduler()
+{
+	// TODO Auto-generated destructor stub
+}
+
+//Decides whether or not to admit a new job
+bool decideAdmitNewJob()
+{
+	return newJobAdmissionStatus;
+}
+
+//Converts status of entity among Job-->Process-->Terminated by gathering info from PCB
+std::string changeEntityStatus()
+{
+	return entityStatus;
+}

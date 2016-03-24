@@ -1,0 +1,22 @@
+/*
+ * MediumLevelScheduler.h
+ *
+ *  Created on: Mar 24, 2016
+ *      Author: Brett
+ */
+
+#ifndef MEDIUMLEVELSCHEDULER_H_
+#define MEDIUMLEVELSCHEDULER_H_
+
+#include "PCB.h"
+
+class MediumLevelScheduler
+{
+private:
+
+public:
+	MediumLevelScheduler();
+	virtual ~MediumLevelScheduler();
+};
+
+#endif /* MEDIUMLEVELSCHEDULER_H_ */

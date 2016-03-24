@@ -1,0 +1,10 @@
+17:54:25 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./HighLevelScheduler.o ./test.o   
+Finished building target: OS
+ 
+
+17:54:26 Build Finished (took 250ms)
+

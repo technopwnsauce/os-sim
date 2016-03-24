@@ -1,0 +1,18 @@
+/*
+ * HighLevelScheduler.cpp
+ *
+ *  Created on: Mar 22, 2016
+ *      Author: Brett
+ */
+
+#include "HighLevelScheduler.h"
+
+HighLevelScheduler::HighLevelScheduler() {
+	// TODO Auto-generated constructor stub
+
+}
+
+HighLevelScheduler::~HighLevelScheduler() {
+	// TODO Auto-generated destructor stub
+}
+

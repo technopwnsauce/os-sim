@@ -22,7 +22,7 @@ private:
 	int priority; //Priority level relative to other processes
 	int programCounter; //Address of the next instruction in the program to be executed
 	int *memoryPointer; //pointers to program code/data & memory blocks shared with other processes
-	int contextdata[];//data that are present in registers in the processor while its executing
+	int contextData[10]; //data that are present in registers in the processor while its executing
 	int io; //work on, includes outstanding IO requires, devices, list of files in use, etc
 	AccountingInfo info;
 public:

@@ -1,0 +1,18 @@
+/*
+ * MediumLevelScheduler.cpp
+ *
+ *  Created on: Mar 24, 2016
+ *      Author: Brett
+ */
+
+#include "MediumLevelScheduler.h"
+
+MediumLevelScheduler::MediumLevelScheduler() {
+	// TODO Auto-generated constructor stub
+
+}
+
+MediumLevelScheduler::~MediumLevelScheduler() {
+	// TODO Auto-generated destructor stub
+}
+
