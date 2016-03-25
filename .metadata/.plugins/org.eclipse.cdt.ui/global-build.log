@@ -23,3 +23,61 @@ make: Nothing to be done for `all'.
 21:29:26 **** Incremental Build of configuration Debug for project OS ****
 make all 
 make: Nothing to be done for `all'.
+22:06:04 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../PCB.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"PCB.d" -MT"PCB.o" -o "PCB.o" "../PCB.cpp"
+In file included from ../PCB.cpp:10:
+../PCB.h:16:18: warning: in-class initialization of non-static data member is a C++11 extension [-Wc++11-extensions]
+        time_t timeLeft = 0; //time used 
+                        ^
+../PCB.h:29:6: error: field has incomplete type 'int []'
+        int contextdata[];//data that are present in registers in the processor while its executing
+            ^
+../PCB.cpp:19:25: warning: implicit conversion of NULL constant to 'int' [-Wnull-conversion]
+        this->programCounter = NULL;
+                             ~ ^~~~
+                               0
+../PCB.cpp:22:13: warning: implicit conversion of NULL constant to 'int' [-Wnull-conversion]
+        this->io = NULL;
+                 ~ ^~~~
+                   0
+In file included from ../PCB.cpp:10:
+../PCB.h:29:6: warning: private field 'contextdata' is not used [-Wunused-private-field]
+        int contextdata[];//data that are present in registers in the processor while its executing
+            ^
+4 warnings and 1 error generated.
+make: *** [PCB.o] Error 1
+22:10:14 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../PCB.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"PCB.d" -MT"PCB.o" -o "PCB.o" "../PCB.cpp"
+Finished building: ../PCB.cpp
+ 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./PCB.o ./main.o   
+Finished building target: OS
+ 
+22:10:33 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../PCB.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"PCB.d" -MT"PCB.o" -o "PCB.o" "../PCB.cpp"
+Finished building: ../PCB.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./PCB.o ./main.o   
+Finished building target: OS
+ 
+22:10:40 **** Incremental Build of configuration Debug for project OS ****
+make all 
+make: Nothing to be done for `all'.
