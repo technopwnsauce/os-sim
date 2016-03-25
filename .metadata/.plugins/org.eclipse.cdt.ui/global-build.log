@@ -646,3 +646,262 @@ Invoking: Cross G++ Linker
 g++  -o "OS"  ./HighLevelScheduler.o ./test.o   
 Finished building target: OS
  
+21:58:04 **** Incremental Build of configuration Debug for project OS ****
+make all 
+make: Nothing to be done for `all'.
+22:31:27 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../HighLevelScheduler.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"HighLevelScheduler.d" -MT"HighLevelScheduler.o" -o "HighLevelScheduler.o" "../HighLevelScheduler.cpp"
+../HighLevelScheduler.cpp:37:1: warning: control reaches end of non-void function [-Wreturn-type]
+}
+^
+../HighLevelScheduler.cpp:49:7: error: use of undeclared identifier 'p'
+                if (p)
+                    ^
+../HighLevelScheduler.cpp:50:2: error: expected statement
+        }
+        ^
+In file included from ../HighLevelScheduler.cpp:8:
+../HighLevelScheduler.h:16:7: warning: private field 'newJobAdmissionStatus' is not used [-Wunused-private-field]
+        bool newJobAdmissionStatus; // Indicates whether a new job will be admitted? (T=Admit, F=No Admit)
+             ^
+../HighLevelScheduler.h:19:6: warning: private field 'processPriority' is not used [-Wunused-private-field]
+        int processPriority; // Process priority
+            ^
+../HighLevelScheduler.h:20:6: warning: private field 'expectedExecutionTime' is not used [-Wunused-private-field]
+        int expectedExecutionTime;// Expected execution time
+            ^
+../HighLevelScheduler.h:21:6: warning: private field 'processIoLevel' is not used [-Wunused-private-field]
+        int processIoLevel; // Integer rating of process's level of I/O utilization
+            ^
+../HighLevelScheduler.h:22:6: warning: private field 'poolIoLevel' is not used [-Wunused-private-field]
+        int poolIoLevel; // Averaged integer rating of entire pool's level of I/O utilization
+            ^
+../HighLevelScheduler.h:23:6: warning: private field 'poolIoLevels' is not used [-Wunused-private-field]
+        int poolIoLevels[100]; //Stores IO rating of each of the potential 100 processes in the pool
+            ^
+../HighLevelScheduler.h:24:6: warning: private field 'poolCount' is not used [-Wunused-private-field]
+        int poolCount; // Number of processes in the pool
+            ^
+8 warnings and 2 errors generated.
+make: *** [HighLevelScheduler.o] Error 1
+22:36:13 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../HighLevelScheduler.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"HighLevelScheduler.d" -MT"HighLevelScheduler.o" -o "HighLevelScheduler.o" "../HighLevelScheduler.cpp"
+../HighLevelScheduler.cpp:38:15: error: array type 'int [100]' is not assignable
+        poolIoLevels = floor(tempIoTotal/poolCount);
+        ~~~~~~~~~~~~ ^
+../HighLevelScheduler.cpp:51:7: error: use of undeclared identifier 'p'
+                if (p)
+                    ^
+../HighLevelScheduler.cpp:52:2: error: expected statement
+        }
+        ^
+In file included from ../HighLevelScheduler.cpp:8:
+../HighLevelScheduler.h:17:7: warning: private field 'newJobAdmissionStatus' is not used [-Wunused-private-field]
+        bool newJobAdmissionStatus; // Indicates whether a new job will be admitted? (T=Admit, F=No Admit)
+             ^
+../HighLevelScheduler.h:20:6: warning: private field 'processPriority' is not used [-Wunused-private-field]
+        int processPriority; // Process priority
+            ^
+../HighLevelScheduler.h:21:6: warning: private field 'expectedExecutionTime' is not used [-Wunused-private-field]
+        int expectedExecutionTime;// Expected execution time
+            ^
+../HighLevelScheduler.h:22:6: warning: private field 'processIoLevel' is not used [-Wunused-private-field]
+        int processIoLevel; // Integer rating of process's level of I/O utilization
+            ^
+../HighLevelScheduler.h:23:6: warning: private field 'poolIoLevel' is not used [-Wunused-private-field]
+        int poolIoLevel; // Averaged integer rating of entire pool's level of I/O utilization
+            ^
+../HighLevelScheduler.h:24:6: warning: private field 'poolIoLevels' is not used [-Wunused-private-field]
+        int poolIoLevels[100]; //Stores IO rating of each of the potential 100 processes in the pool
+            ^
+../HighLevelScheduler.h:25:6: warning: private field 'poolCount' is not used [-Wunused-private-field]
+        int poolCount; // Number of processes in the pool
+            ^
+7 warnings and 3 errors generated.
+make: *** [HighLevelScheduler.o] Error 1
+22:36:46 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../HighLevelScheduler.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"HighLevelScheduler.d" -MT"HighLevelScheduler.o" -o "HighLevelScheduler.o" "../HighLevelScheduler.cpp"
+../HighLevelScheduler.cpp:39:1: warning: control reaches end of non-void function [-Wreturn-type]
+}
+^
+../HighLevelScheduler.cpp:51:7: error: use of undeclared identifier 'p'
+                if (p)
+                    ^
+../HighLevelScheduler.cpp:52:2: error: expected statement
+        }
+        ^
+In file included from ../HighLevelScheduler.cpp:8:
+../HighLevelScheduler.h:17:7: warning: private field 'newJobAdmissionStatus' is not used [-Wunused-private-field]
+        bool newJobAdmissionStatus; // Indicates whether a new job will be admitted? (T=Admit, F=No Admit)
+             ^
+../HighLevelScheduler.h:20:6: warning: private field 'processPriority' is not used [-Wunused-private-field]
+        int processPriority; // Process priority
+            ^
+../HighLevelScheduler.h:21:6: warning: private field 'expectedExecutionTime' is not used [-Wunused-private-field]
+        int expectedExecutionTime;// Expected execution time
+            ^
+../HighLevelScheduler.h:22:6: warning: private field 'processIoLevel' is not used [-Wunused-private-field]
+        int processIoLevel; // Integer rating of process's level of I/O utilization
+            ^
+../HighLevelScheduler.h:23:6: warning: private field 'poolIoLevel' is not used [-Wunused-private-field]
+        int poolIoLevel; // Averaged integer rating of entire pool's level of I/O utilization
+            ^
+../HighLevelScheduler.h:24:6: warning: private field 'poolIoLevels' is not used [-Wunused-private-field]
+        int poolIoLevels[100]; //Stores IO rating of each of the potential 100 processes in the pool
+            ^
+../HighLevelScheduler.h:25:6: warning: private field 'poolCount' is not used [-Wunused-private-field]
+        int poolCount; // Number of processes in the pool
+            ^
+8 warnings and 2 errors generated.
+make: *** [HighLevelScheduler.o] Error 1
+22:47:03 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../HighLevelScheduler.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"HighLevelScheduler.d" -MT"HighLevelScheduler.o" -o "HighLevelScheduler.o" "../HighLevelScheduler.cpp"
+In file included from ../HighLevelScheduler.cpp:8:
+../HighLevelScheduler.h:17:7: warning: private field 'newJobAdmissionStatus' is not used [-Wunused-private-field]
+        bool newJobAdmissionStatus; // Indicates whether a new job will be admitted? (T=Admit, F=No Admit)
+             ^
+../HighLevelScheduler.h:20:6: warning: private field 'processPriority' is not used [-Wunused-private-field]
+        int processPriority; // Process priority
+            ^
+../HighLevelScheduler.h:21:6: warning: private field 'expectedExecutionTime' is not used [-Wunused-private-field]
+        int expectedExecutionTime;// Expected execution time
+            ^
+../HighLevelScheduler.h:22:6: warning: private field 'processIoLevel' is not used [-Wunused-private-field]
+        int processIoLevel; // Integer rating of process's level of I/O utilization
+            ^
+../HighLevelScheduler.h:23:6: warning: private field 'poolIoLevel' is not used [-Wunused-private-field]
+        int poolIoLevel; // Averaged integer rating of entire pool's level of I/O utilization
+            ^
+../HighLevelScheduler.h:24:6: warning: private field 'poolIoLevels' is not used [-Wunused-private-field]
+        int poolIoLevels[100]; //Stores IO rating of each of the potential 100 processes in the pool
+            ^
+../HighLevelScheduler.h:25:6: warning: private field 'poolCount' is not used [-Wunused-private-field]
+        int poolCount; // Number of processes in the pool
+            ^
+7 warnings generated.
+Finished building: ../HighLevelScheduler.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./HighLevelScheduler.o ./test.o   
+Finished building target: OS
+ 
+22:57:36 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../HighLevelScheduler.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"HighLevelScheduler.d" -MT"HighLevelScheduler.o" -o "HighLevelScheduler.o" "../HighLevelScheduler.cpp"
+../HighLevelScheduler.cpp:74:6: error: variable has incomplete type 'void'
+void admitJob(newJobAdmissionStatus)
+     ^
+../HighLevelScheduler.cpp:74:37: error: expected ';' after top level declarator
+void admitJob(newJobAdmissionStatus)
+                                    ^
+                                    ;
+In file included from ../HighLevelScheduler.cpp:8:
+../HighLevelScheduler.h:17:7: warning: private field 'newJobAdmissionStatus' is not used [-Wunused-private-field]
+        bool newJobAdmissionStatus; // Indicates whether a new job will be admitted? (T=Admit, F=No Admit)
+             ^
+../HighLevelScheduler.h:20:6: warning: private field 'processPriority' is not used [-Wunused-private-field]
+        int processPriority; // Process priority
+            ^
+../HighLevelScheduler.h:21:6: warning: private field 'expectedExecutionTime' is not used [-Wunused-private-field]
+        int expectedExecutionTime;// Expected execution time
+            ^
+../HighLevelScheduler.h:22:6: warning: private field 'processIoLevel' is not used [-Wunused-private-field]
+        int processIoLevel; // Integer rating of process's level of I/O utilization
+            ^
+../HighLevelScheduler.h:23:6: warning: private field 'poolIoLevel' is not used [-Wunused-private-field]
+        int poolIoLevel; // Averaged integer rating of entire pool's level of I/O utilization
+            ^
+../HighLevelScheduler.h:24:6: warning: private field 'poolIoLevels' is not used [-Wunused-private-field]
+        int poolIoLevels[100]; //Stores IO rating of each of the potential 100 processes in the pool
+            ^
+../HighLevelScheduler.h:25:6: warning: private field 'poolCount' is not used [-Wunused-private-field]
+        int poolCount; // Number of processes in the pool
+            ^
+7 warnings and 2 errors generated.
+make: *** [HighLevelScheduler.o] Error 1
+23:03:24 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../HighLevelScheduler.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"HighLevelScheduler.d" -MT"HighLevelScheduler.o" -o "HighLevelScheduler.o" "../HighLevelScheduler.cpp"
+../HighLevelScheduler.cpp:74:6: error: variable has incomplete type 'void'
+void admitJob (newJobAdmissionStatus)
+     ^
+../HighLevelScheduler.cpp:74:38: error: expected ';' after top level declarator
+void admitJob (newJobAdmissionStatus)
+                                     ^
+                                     ;
+In file included from ../HighLevelScheduler.cpp:8:
+../HighLevelScheduler.h:17:7: warning: private field 'newJobAdmissionStatus' is not used [-Wunused-private-field]
+        bool newJobAdmissionStatus; // Indicates whether a new job will be admitted? (T=Admit, F=No Admit)
+             ^
+../HighLevelScheduler.h:20:6: warning: private field 'processPriority' is not used [-Wunused-private-field]
+        int processPriority; // Process priority
+            ^
+../HighLevelScheduler.h:21:6: warning: private field 'expectedExecutionTime' is not used [-Wunused-private-field]
+        int expectedExecutionTime;// Expected execution time
+            ^
+../HighLevelScheduler.h:22:6: warning: private field 'processIoLevel' is not used [-Wunused-private-field]
+        int processIoLevel; // Integer rating of process's level of I/O utilization
+            ^
+../HighLevelScheduler.h:23:6: warning: private field 'poolIoLevel' is not used [-Wunused-private-field]
+        int poolIoLevel; // Averaged integer rating of entire pool's level of I/O utilization
+            ^
+../HighLevelScheduler.h:24:6: warning: private field 'poolIoLevels' is not used [-Wunused-private-field]
+        int poolIoLevels[100]; //Stores IO rating of each of the potential 100 processes in the pool
+            ^
+../HighLevelScheduler.h:25:6: warning: private field 'poolCount' is not used [-Wunused-private-field]
+        int poolCount; // Number of processes in the pool
+            ^
+7 warnings and 2 errors generated.
+make: *** [HighLevelScheduler.o] Error 1
+23:04:00 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../HighLevelScheduler.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"HighLevelScheduler.d" -MT"HighLevelScheduler.o" -o "HighLevelScheduler.o" "../HighLevelScheduler.cpp"
+In file included from ../HighLevelScheduler.cpp:8:
+../HighLevelScheduler.h:17:7: warning: private field 'newJobAdmissionStatus' is not used [-Wunused-private-field]
+        bool newJobAdmissionStatus; // Indicates whether a new job will be admitted? (T=Admit, F=No Admit)
+             ^
+../HighLevelScheduler.h:20:6: warning: private field 'processPriority' is not used [-Wunused-private-field]
+        int processPriority; // Process priority
+            ^
+../HighLevelScheduler.h:21:6: warning: private field 'expectedExecutionTime' is not used [-Wunused-private-field]
+        int expectedExecutionTime;// Expected execution time
+            ^
+../HighLevelScheduler.h:22:6: warning: private field 'processIoLevel' is not used [-Wunused-private-field]
+        int processIoLevel; // Integer rating of process's level of I/O utilization
+            ^
+../HighLevelScheduler.h:23:6: warning: private field 'poolIoLevel' is not used [-Wunused-private-field]
+        int poolIoLevel; // Averaged integer rating of entire pool's level of I/O utilization
+            ^
+../HighLevelScheduler.h:24:6: warning: private field 'poolIoLevels' is not used [-Wunused-private-field]
+        int poolIoLevels[100]; //Stores IO rating of each of the potential 100 processes in the pool
+            ^
+../HighLevelScheduler.h:25:6: warning: private field 'poolCount' is not used [-Wunused-private-field]
+        int poolCount; // Number of processes in the pool
+            ^
+7 warnings generated.
+Finished building: ../HighLevelScheduler.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./HighLevelScheduler.o ./test.o   
+Finished building target: OS
+ 

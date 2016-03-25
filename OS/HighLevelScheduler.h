@@ -9,6 +9,7 @@
 #define HIGHLEVELSCHEDULER_H_
 
 #include "PCB.h"
+#include "math.h"
 
 class HighLevelScheduler
 {
@@ -18,7 +19,10 @@ private:
 	// used to decide process admission
 	int processPriority; // Process priority
 	int expectedExecutionTime;// Expected execution time
-	int ioLevel; // Integer rating of process's level of I/O utilization
+	int processIoLevel; // Integer rating of process's level of I/O utilization
+	int poolIoLevel; // Averaged integer rating of entire pool's level of I/O utilization
+	int poolIoLevels[100]; //Stores IO rating of each of the potential 100 processes in the pool
+	int poolCount; // Number of processes in the pool
 public:
 	HighLevelScheduler();
 	virtual ~HighLevelScheduler();
