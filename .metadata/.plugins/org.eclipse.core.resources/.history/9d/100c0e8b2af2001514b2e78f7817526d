@@ -1,0 +1,27 @@
+/*
+ * PCB.cpp
+ *
+ *  Created on: Mar 24, 2016
+ *      Author: kylearchuleta
+ */
+
+#include <iostream>
+#include "PCB.h"
+s
+using namespace std;
+
+PCB::PCB(int id, int pLevel){
+
+	this->identifier = id; //provide the process id
+	this->state = start; //set the state of all new processes to start
+	this->priority = pLevel; //set the priority level
+
+}
+
+PCB::~PCB(){
+
+}
+
+
+
+
