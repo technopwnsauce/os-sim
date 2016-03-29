@@ -31,9 +31,7 @@ int main(void){ //main function - the OS simulator
 	//assign state to 3
 	state = running;
 	process1.assignState(state);
-	//assign state back to 0
 	state = start;
-	//return state of process (3)
 	state = process1.returnState();
 	cout << state << endl;
 

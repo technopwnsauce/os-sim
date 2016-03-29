@@ -18,8 +18,7 @@ struct AccountingInfo{
 	//int account number; //account number  
 };
 
-enum ProcessState {start,ready,blocked,running,end};//state variables (global variable)
-
+enum ProcessState {start,ready,blocked,running,end};
 class PCB {
 private:
 	int identifier; //Unique identifier for each process
@@ -34,8 +33,6 @@ public:
 	PCB(int, int, time_t);
 	~PCB();
 	void test(); //test method to print info
-	void assignState(ProcessState state); //method to assign a state to a process
-	ProcessState returnState(); //method to return the current state of a process
 };
 
 #endif /* PCB_H_ */
