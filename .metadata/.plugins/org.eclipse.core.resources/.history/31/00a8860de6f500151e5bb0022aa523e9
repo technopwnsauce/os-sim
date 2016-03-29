@@ -25,15 +25,7 @@ int main(void){ //main function - the OS simulator
 	process2.test();
 	process3.test();
 
-	//correctly prints out the state of process1 (start, 0)
-	state = process1.returnState();
-	cout << state << endl;
-	//assign state to 3
-	state = running;
-	process1.assignState(state);
-	//assign state back to 0
-	state = start;
-	//return state of process (3)
+	//correctly prints out the state of
 	state = process1.returnState();
 	cout << state << endl;
 
