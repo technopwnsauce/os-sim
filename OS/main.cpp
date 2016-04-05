@@ -36,7 +36,7 @@ int main(void){ //main function - the OS simulator
 	//return state of process (3)
 	state = process1.returnState();
 	cout << state << endl;
-
+	while (1);
 	return 0;
 }
 
