@@ -23,7 +23,7 @@ listStruct blockedList = { NULL, NULL, NULL };
 listStruct runningList = { NULL, NULL, NULL };
 listStruct doneList = { NULL, NULL, NULL };
 
-void searchProcess(PCB*, listStruct);
+int searchProcess(PCB*, listStruct);
 
 void swapList(listStruct, listStruct);
 
@@ -39,6 +39,6 @@ void runningToBlocked(PCB*);
 
 void blockedToReady(PCB*);
 
-void runningToEnd(PCB*);
+//void runningToEnd(PCB*);
 
 #endif
