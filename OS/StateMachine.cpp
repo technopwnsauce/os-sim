@@ -4,18 +4,20 @@
 #include "StateMachine.h"
 
 using namespace std;
-
+/*
 void insertProcess(PCB *Process) {
 	//Initialize the process (I/O)
 }
 
-void searchProcess(PCB* sProcess, listStruct *old) {
+int searchProcess(PCB* sProcess, listStruct *old) {
 	while (old->current->id != sProcess->returnId()) {
 		old->current = old->current->next;
 		if (old->current == NULL) {
 			cout << "You're looking for a process that isn't in the list!";
-			break;
+			return 1;
 		}
+		else
+			return 0;
 	}
 }
 
@@ -50,20 +52,51 @@ void swapList(listStruct *old, listStruct *insert) {
 			old->current->next = NULL;
 		}
 }
+/*void processTransferMain(listStruct *old, listStruct *updateList, PCB *Process) {
+
+	if (updateList->first == NULL) {
+		if (searchProcess(Process, old) == 1)
+			cout << "    ERROR";
+		else
+		{
+			readyList.first = newList.current;
+			readyList.current = readyList.first;
+			readyList.last = readyList.first;
+			swapList(newList, readyList);
+		}
+	}
+	else {
+		if (searchProcess(Process, newList) == 1)
+			cout << "    ERROR";
+		else
+		{
+			searchProcess(Process, newList);
+			swapList(newList, readyList);
+		}
+	}
+}
 
 void newToReady(PCB *Process) {
 	Process->assignState(ready);
 	if (readyList.first == NULL) {
-		searchProcess(Process, newList);
-		readyList.first = newList.current;
-		readyList.current = readyList.first;
-		readyList.last = readyList.first;
-		swapList(newList, readyList);
-
+		if (searchProcess(Process, newList) == 1)
+			cout <<"    ERROR";
+		else
+		{
+			readyList.first = newList.current;
+			readyList.current = readyList.first;
+			readyList.last = readyList.first;
+			swapList(newList, readyList);
+		}
 	}
 	else{
-		searchProcess(Process, newList);
-		swapList(newList, readyList);
+		if (searchProcess(Process, newList) == 1)
+			cout << "    ERROR";
+		else
+		{
+			searchProcess(Process, newList);
+			swapList(newList, readyList);
+		}
 	}
 }
 
@@ -131,8 +164,8 @@ void blockedToReady(PCB *Process) {
 	}
 }
 
-void runningToEnd(PCB *Process) {
-	Process->assignState(end);
+/*void runningToEnd(PCB *Process) {
+	Process->assignState(goodbye);
 	if (doneList.first == NULL) {
 		searchProcess(Process, runningList);
 		doneList.first = runningList.current;
@@ -146,3 +179,4 @@ void runningToEnd(PCB *Process) {
 		swapList(runningList, doneList);
 	}
 }
+*/
