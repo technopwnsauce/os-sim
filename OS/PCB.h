@@ -36,6 +36,7 @@ public:
 	void test(); //test method to print info
 	void assignState(ProcessState state); //method to assign a state to a process
 	ProcessState returnState(); //method to return the current state of a process
+	int returnId();//method to return the process's ID
 };
 
 #endif /* PCB_H_ */

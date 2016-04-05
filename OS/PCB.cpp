@@ -33,6 +33,10 @@ void PCB::test(){ //test to print out values
 	cout << "The id of this process is: " << this->identifier << endl;
 }
 
+int PCB::returnId() {
+	return this->identifier;
+}
+
 void PCB::assignState(ProcessState state){
 	this->state = state;
 }
