@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.toolchain.gnu.mingw.base.1502652717/MSYS_HOME/delimiter=;
+environment/project/cdt.managedbuild.toolchain.gnu.mingw.base.1502652717/MSYS_HOME/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.mingw.base.1502652717/MSYS_HOME/value=C\:\\msys
+environment/project/cdt.managedbuild.toolchain.gnu.mingw.base.1502652717/PATH/delimiter=;
+environment/project/cdt.managedbuild.toolchain.gnu.mingw.base.1502652717/PATH/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.mingw.base.1502652717/PATH/value=${MINGW_HOME}\\bin;${MSYS_HOME}\\bin;C\:/Program Files (x86)/Java/jre1.8.0_73/bin/client;C\:/Program Files (x86)/Java/jre1.8.0_73/bin;C\:/Program Files (x86)/Java/jre1.8.0_73/lib/i386;C\:\\ProgramData\\Oracle\\Java\\javapath;C\:\\Program Files (x86)\\Lenovo\\FusionEngine;C\:\\WINDOWS\\system32;C\:\\WINDOWS;C\:\\WINDOWS\\System32\\Wbem;C\:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C\:\\Program Files (x86)\\ATI Technologies\\ATI.ACE\\Core-Static;C\:\\Program Files\\MATLAB\\R2016a\\bin;C\:\\Users\\Brian\\Desktop;C\:\\msys\\1.0\\bin
+environment/project/cdt.managedbuild.toolchain.gnu.mingw.base.1502652717/append=true
+environment/project/cdt.managedbuild.toolchain.gnu.mingw.base.1502652717/appendContributed=true
