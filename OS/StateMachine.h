@@ -23,9 +23,11 @@ listStruct blockedList = { NULL, NULL, NULL };
 listStruct runningList = { NULL, NULL, NULL };
 listStruct doneList = { NULL, NULL, NULL };
 
-int searchProcess(PCB*, listStruct);               //Function prototypes
+void processTransferMain(listStruct*, listStruct*, PCB *);
 
-void swapList(listStruct, listStruct);
+int searchProcess(PCB*, listStruct*);               //Function prototypes
+
+void swapList(listStruct*, listStruct*);
 
 void insertProcess(PCB*);
 
