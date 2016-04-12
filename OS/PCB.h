@@ -18,7 +18,7 @@ struct AccountingInfo{
 	//int account number; //account number  
 };
 
-enum ProcessState {start,ready,blocked,running,end};//state variables (global variable)
+enum ProcessState {start,ready,blocked,running,endstate, blank};//state variables (global variable)
 
 class PCB {
 private:
