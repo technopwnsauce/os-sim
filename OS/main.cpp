@@ -8,7 +8,8 @@
 #include <iostream>
 #include <ctime>
 #include "PCB.h"
-
+#include "StateMachine.h"
+#include "StateMachineTest.h"
 using namespace std;
 
 int main(void){ //main function - the OS simulator
