@@ -19,12 +19,16 @@ struct AccountingInfo{
 	//int account number; //account number  
 };
 
+<<<<<<< HEAD
 int pageTable[MEMSIZE][1]; //the page table holds the location in memory as well as the process id number
 
 //global memory
 bool memory[MEMSIZE] = {true}; //memory is either free (true) or taken (false)
 
 enum ProcessState {start,ready,blocked,running,end};//state variables (global variable)
+=======
+enum ProcessState {start,ready,blocked,running,endstate, blank};//state variables (global variable)
+>>>>>>> master
 
 class PCB {
 private:

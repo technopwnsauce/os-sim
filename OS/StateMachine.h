@@ -5,27 +5,29 @@
 
 int programNumber = 0;
 
-typedef struct listProcess {
+	struct listProcess {                           //Basic List element
 	int id;
 	listProcess *previous;
 	listProcess *next;
 };
 
-typedef struct listStruct {
+	struct listStruct {                            //List Structure
 	listProcess *first;
 	listProcess *current;
 	listProcess *last;
 };
 
-listStruct newList = { NULL, NULL, NULL };
+listStruct newList = { NULL, NULL, NULL };         //List Instances
 listStruct readyList = { NULL, NULL, NULL };
 listStruct blockedList = { NULL, NULL, NULL };
 listStruct runningList = { NULL, NULL, NULL };
 listStruct doneList = { NULL, NULL, NULL };
 
-int searchProcess(PCB*, listStruct);
+void processTransferMain(listStruct*, listStruct*, PCB *);
 
-void swapList(listStruct, listStruct);
+int searchProcess(PCB*, listStruct*);               //Function prototypes
+
+void swapList(listStruct*, listStruct*);
 
 void insertProcess(PCB*);
 
@@ -39,6 +41,6 @@ void runningToBlocked(PCB*);
 
 void blockedToReady(PCB*);
 
-//void runningToEnd(PCB*);
+void runningToEnd(PCB*);
 
 #endif
