@@ -14,7 +14,6 @@ using namespace std;
 PCB::PCB(int id, int size, int pLevel, time_t programTime){
 
 	this->identifier = id; //provide the process id
-	this->processSize = size; // provides the required size in memory
 	this->state = start; //set the state of all new processes to start
 	this->priority = pLevel; //set the priority level
 	this->programCounter = 0; //temp
