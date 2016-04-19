@@ -19,16 +19,17 @@ struct AccountingInfo{
 	//int account number; //account number  
 };
 
-<<<<<<< HEAD
-int pageTable[MEMSIZE][1]; //the page table holds the location in memory as well as the process id number
+struct PageTable { 	//the page table holds the location in memory as well as the process id number
+	int location[MEMSIZE] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+	int processID[MEMSIZE] = {-1}; //sets to a nonsense value until assigned
+};
+//global instance of the page table
+PageTable pTable;
 
 //global memory
 bool memory[MEMSIZE] = {true}; //memory is either free (true) or taken (false)
 
-enum ProcessState {start,ready,blocked,running,end};//state variables (global variable)
-=======
-enum ProcessState {start,ready,blocked,running,endstate, blank};//state variables (global variable)
->>>>>>> master
+enum ProcessState {start,ready,blocked,running,endstate};//state variables (global variable)
 
 class PCB {
 private:
@@ -47,6 +48,8 @@ public:
 	void assignState(ProcessState state); //method to assign a state to a process
 	ProcessState returnState(); //method to return the current state of a process
 	int returnId();//method to return the process's ID
+	bool checkMem();//method to see if there is enough memory available
+	void clearMem();//method to free memory
 };
 
 #endif /* PCB_H_ */

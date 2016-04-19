@@ -45,5 +45,35 @@ ProcessState PCB::returnState(){
 	return this->state;
 }
 
+bool PCB::checkMem(){
+	int count = 0;
+	int temp[MEMSIZE] = {0};
+	for(int i = 0; i < MEMSIZE; i++){
+		if(memory[i] == true) { //checks for free memory
+			count++;
+			temp[i] = 1; // stores free memory in this temp array
+		}
+		if(count == this->processSize){ // if there is enough memory
+			for(int i = 0; i < MEMSIZE; i++){
+				if(temp[i] == 1) {
+					memory[i] = false; // sets the memory value to false
+					pTable.processID[i] = this->identifier;
+				}
+			}
+			return true;
+		}
+	}
+	return false;
+}
+
+void PCB::clearMem(){
+	for(int i = 0; i < MEMSIZE; i++) {
+		if(pTable.processID[i] == this->identifier){
+			pTable.processID[i] = -1;
+			memory[i] = true;
+		}
+	}
+}
+
 
 
