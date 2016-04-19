@@ -1,0 +1,198 @@
+21:27:03 **** Build of configuration Debug for project OS ****
+make all 
+Building file: ../test.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"test.d" -MT"test.o" -o "test.o" "../test.cpp"
+Finished building: ../test.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./test.o   
+Finished building target: OS
+ 
+21:28:59 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./test.o   
+Finished building target: OS
+ 
+21:29:06 **** Incremental Build of configuration Debug for project OS ****
+make all 
+make: Nothing to be done for `all'.
+21:29:26 **** Incremental Build of configuration Debug for project OS ****
+make all 
+make: Nothing to be done for `all'.
+22:06:04 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../PCB.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"PCB.d" -MT"PCB.o" -o "PCB.o" "../PCB.cpp"
+In file included from ../PCB.cpp:10:
+../PCB.h:16:18: warning: in-class initialization of non-static data member is a C++11 extension [-Wc++11-extensions]
+        time_t timeLeft = 0; //time used 
+                        ^
+../PCB.h:29:6: error: field has incomplete type 'int []'
+        int contextdata[];//data that are present in registers in the processor while its executing
+            ^
+../PCB.cpp:19:25: warning: implicit conversion of NULL constant to 'int' [-Wnull-conversion]
+        this->programCounter = NULL;
+                             ~ ^~~~
+                               0
+../PCB.cpp:22:13: warning: implicit conversion of NULL constant to 'int' [-Wnull-conversion]
+        this->io = NULL;
+                 ~ ^~~~
+                   0
+In file included from ../PCB.cpp:10:
+../PCB.h:29:6: warning: private field 'contextdata' is not used [-Wunused-private-field]
+        int contextdata[];//data that are present in registers in the processor while its executing
+            ^
+4 warnings and 1 error generated.
+make: *** [PCB.o] Error 1
+22:10:14 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../PCB.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"PCB.d" -MT"PCB.o" -o "PCB.o" "../PCB.cpp"
+Finished building: ../PCB.cpp
+ 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./PCB.o ./main.o   
+Finished building target: OS
+ 
+22:10:33 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../PCB.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"PCB.d" -MT"PCB.o" -o "PCB.o" "../PCB.cpp"
+Finished building: ../PCB.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./PCB.o ./main.o   
+Finished building target: OS
+ 
+22:10:40 **** Incremental Build of configuration Debug for project OS ****
+make all 
+make: Nothing to be done for `all'.
+15:38:19 **** Clean-only build of configuration Debug for project OS ****
+make clean 
+rm -rf  ./PCB.o ./main.o  ./PCB.d ./main.d  OS
+ 
+15:38:26 **** Build of configuration Debug for project OS ****
+make all 
+Building file: ../PCB.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"PCB.d" -MT"PCB.o" -o "PCB.o" "../PCB.cpp"
+Finished building: ../PCB.cpp
+ 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./PCB.o ./main.o   
+Finished building target: OS
+ 
+15:39:22 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./PCB.o ./main.o   
+Finished building target: OS
+ 
+15:39:25 **** Incremental Build of configuration Debug for project OS ****
+make all 
+make: Nothing to be done for `all'.
+15:43:24 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../PCB.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"PCB.d" -MT"PCB.o" -o "PCB.o" "../PCB.cpp"
+Finished building: ../PCB.cpp
+ 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./PCB.o ./main.o   
+Finished building target: OS
+ 
+15:43:29 **** Incremental Build of configuration Debug for project OS ****
+make all 
+make: Nothing to be done for `all'.
+15:30:07 **** Build of configuration Debug for project OS ****
+make all 
+Building file: ../PCB.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"PCB.d" -MT"PCB.o" -o "PCB.o" "../PCB.cpp"
+Finished building: ../PCB.cpp
+ 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./PCB.o ./main.o   
+Finished building target: OS
+ 
+15:30:27 **** Incremental Build of configuration Debug for project OS ****
+make all 
+make: Nothing to be done for `all'.
+19:18:16 **** Incremental Build of configuration Debug for project OS ****
+make all 
+Building file: ../PCB.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"PCB.d" -MT"PCB.o" -o "PCB.o" "../PCB.cpp"
+Finished building: ../PCB.cpp
+ 
+Building file: ../StateMachine.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"StateMachine.d" -MT"StateMachine.o" -o "StateMachine.o" "../StateMachine.cpp"
+In file included from ../StateMachine.cpp:4:
+../StateMachine.h:8:1: warning: typedef requires a name [-Wmissing-declarations]
+Finished building: ../StateMachine.cpp
+typedef struct listProcess {
+^~~~~~~
+../StateMachine.h:14:1: warning: typedef requires a name [-Wmissing-declarations]
+typedef struct listStruct {
+^~~~~~~
+../StateMachine.cpp:55:1: warning: '/*' within block comment [-Wcomment]
+/*void processTransferMain(listStruct *old, listStruct *updateList, PCB *Process) {
+^
+ 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.cpp"
+../StateMachine.cpp:167:1: warning: '/*' within block comment [-Wcomment]
+/*void runningToEnd(PCB *Process) {
+^
+4 warnings generated.
+Finished building: ../main.cpp
+ 
+Building target: OS
+Invoking: Cross G++ Linker
+g++  -o "OS"  ./PCB.o ./StateMachine.o ./main.o   
+Finished building target: OS
+ 
+19:18:23 **** Incremental Build of configuration Debug for project OS ****
+make all 
+make: Nothing to be done for `all'.

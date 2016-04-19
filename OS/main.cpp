@@ -17,9 +17,9 @@ int main(void){ //main function - the OS simulator
 
 	ProcessState state;
 
-	PCB process1(0,1,1000);
-	PCB process2(1,2,600);
-	PCB process3(2,2,400);
+	PCB process1(0, 3 ,1, 1000);
+	PCB process2(1, 3, 2, 600);
+	PCB process3(2, 3, 2, 400);
 
 	process1.test();
 	process2.test();

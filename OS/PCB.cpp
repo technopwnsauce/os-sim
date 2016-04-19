@@ -11,13 +11,13 @@
 
 using namespace std;
 
-PCB::PCB(int id, int pLevel, time_t programTime){
+PCB::PCB(int id, int size, int pLevel, time_t programTime){
 
 	this->identifier = id; //provide the process id
+	this->processSize = size; // provides the required size in memory
 	this->state = start; //set the state of all new processes to start
 	this->priority = pLevel; //set the priority level
 	this->programCounter = 0; //temp
-	this->memoryPointer = 0; //temp
 	this->contextdata = 0; //temp
 	this->io = 0; //temp
 	this->info.timeLeft = programTime; //sets the amount of time the program requires to run
@@ -43,6 +43,36 @@ void PCB::assignState(ProcessState state){
 
 ProcessState PCB::returnState(){
 	return this->state;
+}
+
+bool PCB::checkMem(){
+	int count = 0;
+	int temp[MEMSIZE] = {0};
+	for(int i = 0; i < MEMSIZE; i++){
+		if(memory[i] == true) { //checks for free memory
+			count++;
+			temp[i] = 1; // stores free memory in this temp array
+		}
+		if(count == this->processSize){ // if there is enough memory
+			for(int i = 0; i < MEMSIZE; i++){
+				if(temp[i] == 1) {
+					memory[i] = false; // sets the memory value to false
+					pTable.processID[i] = this->identifier;
+				}
+			}
+			return true;
+		}
+	}
+	return false;
+}
+
+void PCB::clearMem(){
+	for(int i = 0; i < MEMSIZE; i++) {
+		if(pTable.processID[i] == this->identifier){
+			pTable.processID[i] = -1;
+			memory[i] = true;
+		}
+	}
 }
 
 
