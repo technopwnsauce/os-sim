@@ -9,8 +9,16 @@
 #include <ctime>
 #include "PCB.h"
 #include "StateMachine.h"
-#include "StateMachineTest.h"
+
+listStruct newList = { NULL, NULL, NULL };         //List Instances
+listStruct readyList = { NULL, NULL, NULL };
+listStruct blockedList = { NULL, NULL, NULL };
+listStruct runningList = { NULL, NULL, NULL };
+listStruct doneList = { NULL, NULL, NULL };
+
 using namespace std;
+
+
 
 int main(void){ //main function - the OS simulator
 
@@ -18,9 +26,9 @@ int main(void){ //main function - the OS simulator
 
 	ProcessState state;
 
-	PCB process1(0,1,1000);
-	PCB process2(1,2,600);
-	PCB process3(2,2,400);
+	PCB process1(0, 1,1000);
+	PCB process2(1, 2,600);
+	PCB process3(2, 2,400);
 
 	process1.test();
 	process2.test();
@@ -37,7 +45,7 @@ int main(void){ //main function - the OS simulator
 	//return state of process (3)
 	state = process1.returnState();
 	cout << state << endl;
+
 	while (1);
 	return 0;
 }
-
