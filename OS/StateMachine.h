@@ -1,9 +1,8 @@
 #ifndef StateMachine
 #define StateMachine
 #include <iostream>
-#include "PCB.h"
 
-int programNumber = 0;
+//int programNumber = 0;
 
 	struct listProcess {                           //Basic List element
 	int id;
@@ -17,17 +16,19 @@ int programNumber = 0;
 	listProcess *last;
 };
 
-listStruct newList = { NULL, NULL, NULL };         //List Instances
-listStruct readyList = { NULL, NULL, NULL };
-listStruct blockedList = { NULL, NULL, NULL };
-listStruct runningList = { NULL, NULL, NULL };
-listStruct doneList = { NULL, NULL, NULL };
+	extern listStruct newList;
+	extern listStruct readyList;
+	extern listStruct runningList;
+	extern listStruct blockedList;
+	extern listStruct doneList;
 
 void processTransferMain(listStruct*, listStruct*, PCB *);
 
 int searchProcess(PCB*, listStruct*);               //Function prototypes
 
 void swapList(listStruct*, listStruct*);
+
+void firstElement(listStruct*, listStruct*);
 
 void insertProcess(PCB*);
 
@@ -42,5 +43,7 @@ void runningToBlocked(PCB*);
 void blockedToReady(PCB*);
 
 void runningToEnd(PCB*);
+
+void printList(listStruct*, listStruct*);
 
 #endif
