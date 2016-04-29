@@ -20,6 +20,8 @@ PCB::PCB(int id, int size, int pLevel, time_t programTime){
 	this->programCounter = 0; //temp
 	this->contextdata = 0; //temp
 	this->io = 0; //temp
+	this->ioCounter = 0;//io cycle counter
+	this->ioLeft = 0;//io requests left to do
 	this->info.timeLeft = programTime; //sets the amount of time the program requires to run
 	this->info.timeSlice = TIMESLICE; //sets the value of a timeslice
 
@@ -43,6 +45,11 @@ void PCB::assignState(ProcessState state){
 
 ProcessState PCB::returnState(){
 	return this->state;
+}
+
+void PCB::setIO(int setio) {
+	this->io = setio;
+	this->ioLeft = setio;
 }
 
 bool PCB::checkMem(){

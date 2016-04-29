@@ -2,12 +2,122 @@
 #include <iostream>
 #include "PCB.h" 
 #include "StateMachine.h"
+#include<fstream>
+#include<istream>
+#include<string>
 
 using namespace std;
 
-/*void insertProcess(PCB *Process) {
-	//Initialize the process (I/O)
-}*/
+string getString = "empty";
+int getEntrypoint = 0;
+int getSize = 0;
+int getIOnumber = 0;
+time_t getTime = 0;
+preStateProcess *tempProc = NULL;
+listProcess *tempIndex = NULL;
+PCB *tempPCB = NULL;
+preStateList preState = { NULL, NULL, NULL };
+
+void initFile() {
+	ifstream processFile;
+	processFile.open("processFile.txt");
+	if (processFile.is_open()) {
+		while (processFile) {
+			processFile >> getEntrypoint;
+			processFile >> getSize;
+			processFile >> getIOnumber;
+			processFile >> getTime;
+			tempProc = new preStateProcess;
+			tempProc->entrypoint = getEntrypoint;
+			tempProc->count = tempProc->entrypoint;
+			tempProc->size = getSize;
+			tempProc->ionumber = getIOnumber;
+			tempProc->runtime = getTime;
+			if (preState.first == NULL) {
+				preState.first = tempProc;
+				preState.current = preState.first;
+				preState.last = preState.current;
+				tempProc->previous = NULL;
+				tempProc->next = NULL;
+			}
+			else
+			{
+				preState.last->next = tempProc;
+				tempProc->previous = preState.last;
+				tempProc->next = NULL;
+				preState.last = tempProc;
+			}
+		}
+	}
+	else
+		cout << "File could not be opened! ERROR\n";
+}
+
+void initializePCB() {
+	idmax++;
+	tempPCB = new PCB(idmax, getSize, 0, getTime);
+	tempPCB->setIO(getIOnumber);
+	tempIndex = new listProcess;
+	tempIndex->id = idmax;
+	tempIndex->next = NULL;
+	tempIndex->getPCB = tempPCB;
+
+	if (newList.first == NULL) {
+		newList.first = tempIndex;
+		newList.current = newList.first;
+		newList.last = newList.first;
+		tempIndex->previous = NULL;
+	}
+	else {
+		tempIndex->previous = newList.last;
+		newList.last->next = tempIndex;
+		newList.last = tempIndex;
+	}
+}
+
+void deleteElement() {
+	if (preState.current->previous == NULL && preState.current->next == NULL) {
+		delete preState.current;
+		preState.current = NULL;
+		preState.first = NULL;
+		preState.last = NULL;
+	}
+	else {
+		if(preState.current->previous == NULL){
+			preState.current->next->previous = NULL;
+			preState.first = preState.current->next;
+		}
+		if (preState.current->next == NULL) {
+			preState.current->previous->next = NULL;
+			preState.last = preState.current->previous;
+		}
+		if(preState.current->previous != NULL && preState.current->next != NULL){
+			preState.current->next->previous = preState.current->previous;
+			preState.current->previous->next = preState.current->next;
+		}
+		tempProc = preState.current;
+		preState.current = preState.current->next;
+		delete tempProc;
+	}
+}
+
+void processInitializer() {
+	if (preState.current == NULL)
+		return;
+	else {
+		while (preState.current != NULL) {
+			if (preState.current->count == 0) {
+				initializePCB();
+				deleteElement();
+			}
+			else {
+				preState.current->count--;
+				preState.current = preState.current->next;
+			}
+			preState.current = preState.first;
+		}
+	}
+}
 
 int searchProcess(PCB* sProcess, listStruct *old) {                                        //Search for a process in a list
 	old->current = old->first;
@@ -154,5 +264,9 @@ void printList(listStruct * oldStruct, listStruct * newStruct) {                
 		newStruct->current = newStruct->current->next;
 	}
 	cout << "\nnew^\n\n";
+}
+
+void populateIO() {
+
 }
 

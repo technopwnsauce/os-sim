@@ -9,13 +9,18 @@
 #include <ctime>
 #include "PCB.h"
 #include "StateMachine.h"
+#include "Shell.h"
 
 listStruct newList = { NULL, NULL, NULL };         //List Instances
 listStruct readyList = { NULL, NULL, NULL };
 listStruct blockedList = { NULL, NULL, NULL };
 listStruct runningList = { NULL, NULL, NULL };
 listStruct doneList = { NULL, NULL, NULL };
-
+bool done = 0;
+int idmax = 0;
+PageTable pTable;
+bool memory[MEMSIZE] = { true };
+ 
 using namespace std;
 
 
@@ -24,28 +29,34 @@ int main(void){ //main function - the OS simulator
 
 	//some test "processes to see if the PCB works.
 
-	ProcessState state;
+	//ProcessState state;
 
-	PCB process1(0, 3, 1, 1000);
-	PCB process2(1, 3, 2, 600);
-	PCB process3(2, 3, 2, 400);
+	//while (!done);
+	//PCB process1(0, 3, 1, 1000);
+	//PCB process2(1, 3, 2, 600);
+	//PCB process3(2, 3, 2, 400);
 
-	process1.test();
-	process2.test();
-	process3.test();
+	//process1.test();
+	//process2.test();
+	//process3.test();
 
 	//correctly prints out the state of process1 (start, 0)
-	state = process1.returnState();
-	cout << state << endl;
+	//state = process1.returnState();
+	//cout << state << endl;
 	//assign state to 3
-	state = running;
-	process1.assignState(state);
+	//state = running;
+	//process1.assignState(state);
 	//assign state back to 0
-	state = start;
+	//state = start;
 	//return state of process (3)
-	state = process1.returnState();
-	cout << state << endl;
+	//state = process1.returnState();
+	//cout << state << endl;
 
-	while (1);
+	//initializePCB();
+	initFile();
+	int ioTable[60][5];
+	while (1) {
+		processInitializer();
+	}
 	return 0;
 }

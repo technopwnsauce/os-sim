@@ -13,6 +13,8 @@
 #define TIMESLICE 100 //temporary value for timeslice
 #define MEMSIZE 16 // The OS runs on a 16 MB RAM
 
+//int ioTable = 
+
 struct AccountingInfo{
 	time_t timeLeft; //time used
 	time_t timeSlice; //time limits
@@ -23,11 +25,15 @@ struct PageTable { 	//the page table holds the location in memory as well as the
 	int location[MEMSIZE] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
 	int processID[MEMSIZE] = {-1}; //sets to a nonsense value until assigned
 };
+
+extern PageTable pTable;
+extern bool memory[];
+
 //global instance of the page table
-PageTable pTable;
+//PageTable pTable;
 
 //global memory
-bool memory[MEMSIZE] = {true}; //memory is either free (true) or taken (false)
+//bool memory[MEMSIZE] = {true}; //memory is either free (true) or taken (false)
 
 enum ProcessState {start,ready,blocked,running,endstate};//state variables (global variable)
 
@@ -39,7 +45,9 @@ private:
 	int priority; //Priority level relative to other processes
 	int programCounter; //Address of the next instruction in the program to be executed
 	int contextdata; //data that are present in registers in the processor while its executing
-	int io; //work on, includes outstanding IO requires, devices, list of files in use, etc
+	int io;
+	int ioLeft; //work on, includes outstanding IO requires, devices, list of files in use, etc
+	int ioCounter;
 	AccountingInfo info;
 public:
 	PCB(int, int, int, time_t);
@@ -48,6 +56,9 @@ public:
 	void assignState(ProcessState state); //method to assign a state to a process
 	ProcessState returnState(); //method to return the current state of a process
 	int returnId();//method to return the process's ID
+	void setIO(int setio);
+//	void countIO();
+//	void checkIO();
 	bool checkMem();//method to see if there is enough memory available
 	void clearMem();//method to free memory
 };

@@ -3,9 +3,29 @@
 #include <iostream>
 
 //int programNumber = 0;
+extern int idmax;
+
+
+struct preStateProcess {
+	int entrypoint;
+	int count;
+	preStateProcess *previous;
+	preStateProcess *next;
+	int size;
+	int ionumber;
+	time_t runtime;
+
+};
+
+struct preStateList {
+	preStateProcess *first;
+	preStateProcess *current;
+	preStateProcess *last;
+};
 
 	struct listProcess {                           //Basic List element
 	int id;
+	PCB *getPCB;
 	listProcess *previous;
 	listProcess *next;
 };
@@ -21,6 +41,9 @@
 	extern listStruct runningList;
 	extern listStruct blockedList;
 	extern listStruct doneList;
+
+
+//void initializePreState();
 
 void processTransferMain(listStruct*, listStruct*, PCB *);
 
@@ -45,5 +68,15 @@ void blockedToReady(PCB*);
 void runningToEnd(PCB*);
 
 void printList(listStruct*, listStruct*);
+
+void initFile();
+
+void processInitializer();
+
+void initializePCB();
+
+void deleteElement();
+
+void populateIO();
 
 #endif
