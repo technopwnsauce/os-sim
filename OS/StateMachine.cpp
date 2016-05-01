@@ -2,21 +2,28 @@
 #include <iostream>
 #include "PCB.h" 
 #include "StateMachine.h"
+#include "HighLevelScheduler.h"
 #include<fstream>
 #include<istream>
 #include<string>
 
 using namespace std;
 
+extern bool statechange;
+
 string getString = "empty";
 int getEntrypoint = 0;
 int getSize = 0;
 int getIOnumber = 0;
 time_t getTime = 0;
+int getPriority = 1;
 preStateProcess *tempProc = NULL;
 listProcess *tempIndex = NULL;
 PCB *tempPCB = NULL;
 preStateList preState = { NULL, NULL, NULL };
+int i1 = 0;
+int i = 0;
+int swapio = 0;
 
 void initFile() {
 	ifstream processFile;
@@ -27,12 +34,14 @@ void initFile() {
 			processFile >> getSize;
 			processFile >> getIOnumber;
 			processFile >> getTime;
+			processFile >> getPriority;
 			tempProc = new preStateProcess;
 			tempProc->entrypoint = getEntrypoint;
 			tempProc->count = tempProc->entrypoint;
 			tempProc->size = getSize;
 			tempProc->ionumber = getIOnumber;
 			tempProc->runtime = getTime;
+			tempProc->priority = getPriority;
 			if (preState.first == NULL) {
 				preState.first = tempProc;
 				preState.current = preState.first;
@@ -55,13 +64,28 @@ void initFile() {
 
 void initializePCB() {
 	idmax++;
-	tempPCB = new PCB(idmax, getSize, 0, getTime);
-	tempPCB->setIO(getIOnumber);
+	tempPCB = new PCB(idmax, preState.current->size, preState.current->priority, preState.current->runtime);
+	tempPCB->setIO(preState.current->ionumber);
+
 	tempIndex = new listProcess;
 	tempIndex->id = idmax;
 	tempIndex->next = NULL;
 	tempIndex->getPCB = tempPCB;
-
+	for (i = 0; i < preState.current->ionumber; i++) {
+		tempIndex->ioList[i][1] = ((rand() % 25) + 25);
+	}
+	for (i = 0; i < preState.current->ionumber; i++) {
+		tempIndex->ioList[i][1] = ((rand() % tempIndex->getPCB->returnTotalTime()));
+	}
+	for(i1 = 0; i1 < preState.current->ionumber-1; i++){
+		for (i = 0; i < preState.current->ionumber - 1; i++) {
+			if (tempIndex->ioList[i] < tempIndex->ioList[i + 1]) {
+				swapio = tempIndex->ioList[i][0];
+				tempIndex->ioList[i][0] = tempIndex->ioList[i + 1][0];
+				tempIndex->ioList[i + 1][0] = swapio;
+			}
+		}
+	}
 	if (newList.first == NULL) {
 		newList.first = tempIndex;
 		newList.current = newList.first;
@@ -73,11 +97,12 @@ void initializePCB() {
 		newList.last->next = tempIndex;
 		newList.last = tempIndex;
 	}
+	//highMain(newList.last->id);//bretts shit
 }
 
 void deleteElement() {
-	if (preState.current->previous == NULL && preState.current->next == NULL) {
 		delete preState.current;
+	if (preState.current->previous == NULL && preState.current->next == NULL) {
 		preState.current = NULL;
 		preState.first = NULL;
 		preState.last = NULL;
@@ -114,8 +139,8 @@ void processInitializer() {
 				preState.current->count--;
 				preState.current = preState.current->next;
 			}
-			preState.current = preState.first;
 		}
+		preState.current = preState.first;
 	}
 }
 
@@ -218,6 +243,7 @@ void processTransferMain(listStruct *old, listStruct *updateList, PCB *Process) 
 			swapList(old, updateList);                                                      //In the case of a non-empty target list, tranfers the process
 		}
 	}
+	statechange = 1;
 }
 
 void newToReady(PCB *Process) {                               //New->Ready
@@ -264,9 +290,5 @@ void printList(listStruct * oldStruct, listStruct * newStruct) {                
 		newStruct->current = newStruct->current->next;
 	}
 	cout << "\nnew^\n\n";
-}
-
-void populateIO() {
-
 }
 

@@ -23,7 +23,7 @@ struct AccountingInfo{
 
 struct PageTable { 	//the page table holds the location in memory as well as the process id number
 	int location[MEMSIZE] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-	int processID[MEMSIZE] = {-1}; //sets to a nonsense value until assigned
+	int processID[MEMSIZE] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}; //sets to a nonsense value until assigned
 };
 
 extern PageTable pTable;
@@ -43,7 +43,7 @@ private:
 	int processSize; //how much memory is required to run
 	ProcessState state; //State of the process
 	int priority; //Priority level relative to other processes
-	int programCounter; //Address of the next instruction in the program to be executed
+	int totalTime; //Address of the next instruction in the program to be executed
 	int contextdata; //data that are present in registers in the processor while its executing
 	int io;
 	int ioLeft; //work on, includes outstanding IO requires, devices, list of files in use, etc
@@ -53,14 +53,23 @@ public:
 	PCB(int, int, int, time_t);
 	~PCB();
 	void test(); //test method to print info
+	void decTime();//decrements time left
+	void decrementIOCounter();
 	void assignState(ProcessState state); //method to assign a state to a process
 	ProcessState returnState(); //method to return the current state of a process
+	int returnTotalTime();
 	int returnId();//method to return the process's ID
+    int returnPriority();//method to reutrn the process's priority level
+	int returnIOLeft();
+	int returnTimeLeft();
+	int returnIO();
+	int returnIOCounter();
 	void setIO(int setio);
-//	void countIO();
-//	void checkIO();
+	void setID(int id);
+	void countIO(int);
 	bool checkMem();//method to see if there is enough memory available
 	void clearMem();//method to free memory
+	bool checkMemLeft();
 };
 
 #endif /* PCB_H_ */
