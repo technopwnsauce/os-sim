@@ -5,7 +5,6 @@
 //int programNumber = 0;
 extern int idmax;
 
-
 struct preStateProcess {
 	int entrypoint;
 	int count;
@@ -14,7 +13,7 @@ struct preStateProcess {
 	int size;
 	int ionumber;
 	time_t runtime;
-
+	int priority;
 };
 
 struct preStateList {
@@ -23,9 +22,10 @@ struct preStateList {
 	preStateProcess *last;
 };
 
-	struct listProcess {                           //Basic List element
+struct listProcess {                           //Basic List element
 	int id;
 	PCB *getPCB;
+	int ioList[5][2] = { 0 };
 	listProcess *previous;
 	listProcess *next;
 };
@@ -41,9 +41,6 @@ struct preStateList {
 	extern listStruct runningList;
 	extern listStruct blockedList;
 	extern listStruct doneList;
-
-
-//void initializePreState();
 
 void processTransferMain(listStruct*, listStruct*, PCB *);
 
@@ -77,6 +74,5 @@ void initializePCB();
 
 void deleteElement();
 
-void populateIO();
 
 #endif

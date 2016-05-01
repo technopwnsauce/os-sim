@@ -17,7 +17,7 @@ PCB::PCB(int id, int size, int pLevel, time_t programTime){
 	this->processSize = size; // provides the required size in memory
 	this->state = start; //set the state of all new processes to start
 	this->priority = pLevel; //set the priority level
-	this->programCounter = 0; //temp
+	this->totalTime = programTime; //temp
 	this->contextdata = 0; //temp
 	this->io = 0; //temp
 	this->ioCounter = 0;//io cycle counter
@@ -31,12 +31,24 @@ PCB::~PCB(){
 
 }
 
+void PCB::setID(int newid) {
+	this->identifier = newid;
+}
+
 void PCB::test(){ //test to print out values
 	cout << "The id of this process is: " << this->identifier << endl;
 }
 
+int PCB::returnTotalTime() {
+	return this->totalTime;
+}
+
 int PCB::returnId() {
 	return this->identifier;
+}
+
+int PCB::returnPriority(){
+    return this->priority;
 }
 
 void PCB::assignState(ProcessState state){
@@ -47,9 +59,37 @@ ProcessState PCB::returnState(){
 	return this->state;
 }
 
+int PCB::returnIOLeft() {
+	return this->ioLeft;
+}
+
+void PCB::countIO(int count) {
+	this->ioCounter = count;
+}
+
+int PCB::returnTimeLeft() {
+	return this->info.timeLeft;
+}
+
+int PCB::returnIO() {
+	return this->io;
+}
+
+int PCB::returnIOCounter() {
+	return this->ioCounter;
+}
+
 void PCB::setIO(int setio) {
 	this->io = setio;
 	this->ioLeft = setio;
+}
+
+void PCB::decTime() {
+	this->info.timeLeft--;
+}
+
+void PCB::decrementIOCounter() {
+	this->ioCounter -= 1;
 }
 
 bool PCB::checkMem(){
@@ -82,5 +122,14 @@ void PCB::clearMem(){
 	}
 }
 
-
+bool PCB::checkMemLeft() {
+	int count = 0;
+	for (int i = 0; i < MEMSIZE; i++) {
+		if (memory[i] == true) count++;
+	}
+	if (this->processSize <= count) {
+		return true;
+	}
+	else return false;
+}
 
