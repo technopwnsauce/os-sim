@@ -125,11 +125,12 @@ void PCB::clearMem(){
 bool PCB::checkMemLeft() {
 	int count = 0;
 	for (int i = 0; i < MEMSIZE; i++) {
-		if (memory[i] == true) count++;
+		if (memory[i] == false) count++;
 	}
 	if (this->processSize <= count) {
 		return true;
 	}
-	else return false;
+	else
+		return false;
 }
 

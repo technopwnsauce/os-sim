@@ -3,8 +3,13 @@
 
 #include <iostream>
 #include <ctime>
+#include "PCB.h"
+#include "StateMachine.h"
+
 
 int gatherPool();
+
+int sizeofList(listStruct);
 
 int gatherPoolIoLevel();
 

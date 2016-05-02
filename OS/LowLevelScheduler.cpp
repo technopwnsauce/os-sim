@@ -65,19 +65,25 @@ void LowLevelScheduler::runProcess() {
 
 bool LowLevelScheduler::getProcess(int priority){
     bool priorityFound = false;
-    while(readyList.current->next != NULL){
-		if (readyList.current->getPCB->returnPriority() == priority) {
-            readyToRunning(readyList.current->getPCB);
-            priorityFound = true;
-            break;
-        }
-        readyList.current = readyList.current->next;
-    }
-    readyList.current = readyList.first;
-    return priorityFound;
+	if (readyList.current != NULL) {
+		while (readyList.current->next != NULL) {
+			if (readyList.current->getPCB->returnPriority() == priority) {
+				readyToRunning(readyList.current->getPCB);
+				priorityFound = true;
+				break;
+			}
+			readyList.current = readyList.current->next;
+		}
+		readyList.current = readyList.first;
+		return priorityFound;
+	}
+	else
+		return 1;
 }
 
 void LowLevelScheduler::decrementIO(){
-    if(blockedList.current->getPCB->returnIOCounter())
-        blockedList.current->getPCB->decrementIOCounter();
+	if (blockedList.first != NULL) {
+		if (blockedList.current->getPCB->returnIOCounter())
+			blockedList.current->getPCB->decrementIOCounter();
+	}
 }

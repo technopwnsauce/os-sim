@@ -77,7 +77,7 @@ void initializePCB() {
 	for (i = 0; i < preState.current->ionumber; i++) {
 		tempIndex->ioList[i][1] = ((rand() % tempIndex->getPCB->returnTotalTime()));
 	}
-	for(i1 = 0; i1 < preState.current->ionumber-1; i++){
+	for(i1 = 0; i1 < preState.current->ionumber-1; i1++){
 		for (i = 0; i < preState.current->ionumber - 1; i++) {
 			if (tempIndex->ioList[i] < tempIndex->ioList[i + 1]) {
 				swapio = tempIndex->ioList[i][0];
@@ -97,15 +97,16 @@ void initializePCB() {
 		newList.last->next = tempIndex;
 		newList.last = tempIndex;
 	}
-	//highMain(newList.last->id);//bretts shit
+	highMain(newList.last->id);//bretts shit
 }
 
 void deleteElement() {
-		delete preState.current;
+//		delete preState.current;
 	if (preState.current->previous == NULL && preState.current->next == NULL) {
-		preState.current = NULL;
 		preState.first = NULL;
 		preState.last = NULL;
+		delete preState.current;
+		preState.current = NULL;
 	}
 	else {
 		if(preState.current->previous == NULL){
@@ -210,13 +211,19 @@ void firstElement(listStruct *old, listStruct *insert) {                        
 
 	else
 	{
-		if (old->current->previous == NULL) {                                               //Handles first and last elements the same way swapList does
-			old->first = old->current->next;
-			old->current->next->previous = NULL;
+		if (old->current->previous == NULL && old->current->next == NULL) {
+			old->first = NULL;
+			old->last = NULL;
 		}
-		if (old->current->next == NULL) {
-			old->last = old->current->previous;
-			old->current->previous->next = NULL;
+		else {
+			if (old->current->previous == NULL) {                                               //Handles first and last elements the same way swapList does
+				old->first = old->current->next;
+				old->current->next->previous = NULL;
+			}
+			if (old->current->next == NULL) {
+				old->last = old->current->previous;
+				old->current->previous->next = NULL;
+			}
 		}
 	}
 
