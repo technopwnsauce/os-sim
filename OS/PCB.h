@@ -9,6 +9,7 @@
 #define PCB_H_
 #include <iostream>
 #include <ctime>
+#include <cstdlib>
 
 #define TIMESLICE 100 //temporary value for timeslice
 #define MEMSIZE 16 // The OS runs on a 16 MB RAM
@@ -16,8 +17,8 @@
 //int ioTable = 
 
 struct AccountingInfo{
-	time_t timeLeft; //time used
-	time_t timeSlice; //time limits
+	int timeLeft; //time used
+	int timeSlice; //time limits
 	//int account number; //account number  
 };
 
@@ -55,6 +56,8 @@ public:
 	void test(); //test method to print info
 	void decTime();//decrements time left
 	void decrementIOCounter();
+	void decTSlice();
+	void PCB::decIOLeft();
 	void assignState(ProcessState state); //method to assign a state to a process
 	ProcessState returnState(); //method to return the current state of a process
 	int returnTotalTime();
@@ -64,6 +67,8 @@ public:
 	int returnTimeLeft();
 	int returnIO();
 	int returnIOCounter();
+	int returnTimeSlice();
+	void setTimeSlice(int);
 	void setIO(int setio);
 	void setID(int id);
 	void countIO(int);

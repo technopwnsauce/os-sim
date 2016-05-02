@@ -127,10 +127,10 @@ bool decideAdmitNewJob()
 	{
 		int tempPoolIoLevel = 0;
 		tempPoolIoLevel = floor(((poolIoLevel + processIoLevel) / (poolCount + 1) / ((poolCount+1)*100)));
-		cout << "pool io level is " + std::to_string(poolIoLevel) + "\n";
+		/*cout << "pool io level is " + std::to_string(poolIoLevel) + "\n";
 		cout << "process io level is:" + std::to_string(processIoLevel) + "\n";
 		cout << "pool count is: " + std::to_string(poolCount) + "\n";
-		cout << "temp pool io level:" + std::to_string(tempPoolIoLevel) + "\n";
+		cout << "temp pool io level:" + std::to_string(tempPoolIoLevel) + "\n"; */
 		if (tempPoolIoLevel < 50)
 		{
 			newJobAdmissionStatus = true;
@@ -142,12 +142,12 @@ bool decideAdmitNewJob()
 	}
     // If there is not enough memory for the process then set newJobAdmissionStatus = false
     // Match PID with PCB ID, then pull number of I/O request
-    bool memory = false;
+    bool mem = false;
     for (int i=0; i<sizeofList(newList); i++)
     {
         if(PID == newList.current->getPCB->returnId())
         {
-            memory = newList.current->getPCB->checkMemLeft();
+            mem = newList.current->getPCB->checkMemLeft();
             break;
         }
         
@@ -156,12 +156,12 @@ bool decideAdmitNewJob()
             newList.current = newList.current->next;
         }
     }
-	cout << "Memory conclusion is: " + std::to_string(memory) + "\n";
     newList.current = newList.first; // Reset pointer
-    if(memory == false)
+    if(mem == false)
     {
         newJobAdmissionStatus = false;
     }
+	else newJobAdmissionStatus = true;
     
 	return newJobAdmissionStatus;
 }
@@ -169,13 +169,16 @@ bool decideAdmitNewJob()
 // Admits a new job when applicable
 void admitJob()
 {
-	cout << "admission status when admitting job is: " + std::to_string(newJobAdmissionStatus) + "\n";
+	//cout << "admission status when admitting job is: " + std::to_string(newJobAdmissionStatus) + "\n";
 	if (newJobAdmissionStatus == true)
 	{
 		for (int i=0; i<sizeofList(newList); i++)
 		{
 			if(PID == newList.current->getPCB->returnId())
 			{
+				newList.current->getPCB->checkMem();
+			//	cout << "Hello, i am " << newList.current->getPCB->returnId() << endl;
+			//	for (int i = 0; i < 1000000000; i++) {};
 				newToReady(newList.current->getPCB);
 				break;
 			}
@@ -200,9 +203,9 @@ void highMain(int processID)
 	admitJob();
 
 	// DEBUGS
-	cout << "Admission Status: " + std::to_string(newJobAdmissionStatus) + "\n";
+	/*cout << "Admission Status: " + std::to_string(newJobAdmissionStatus) + "\n";
 	cout << "processIoLevel: " + std::to_string(processIoLevel) + "\n";
 	cout << "poolIoLevel: " + std::to_string(poolIoLevel) + "\n";
 	cout << "poolCount: " + std::to_string(poolCount) + "\n";
-	cout << "PID: " + std::to_string(PID) + "\n";
+	cout << "PID: " + std::to_string(PID) + "\n";*/
 }

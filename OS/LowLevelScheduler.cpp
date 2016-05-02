@@ -59,31 +59,50 @@ void LowLevelScheduler::runProcess() {
                 innerCount = 0;
             }
         }
+		else {
+			count = 0;
+		}
     
     
 }
 
 bool LowLevelScheduler::getProcess(int priority){
     bool priorityFound = false;
-	if (readyList.current != NULL) {
-		while (readyList.current->next != NULL) {
+	readyList.current = readyList.first;
+//	cout << readyList.first << " " << readyList.current << endl;
+	if (readyList.first != NULL) {
+//		cout << readyList.current->getPCB->returnId() << endl;
+		while (readyList.current != NULL) {
 			if (readyList.current->getPCB->returnPriority() == priority) {
+				readyList.current->getPCB->setTimeSlice(TIMESLICE);
 				readyToRunning(readyList.current->getPCB);
 				priorityFound = true;
 				break;
 			}
 			readyList.current = readyList.current->next;
 		}
+
+/*		if (readyList.current->next == NULL && readyList.current == readyList.first) {
+			readyList.current->getPCB->setTimeSlice(TIMESLICE);
+			readyToRunning(readyList.current->getPCB);
+			priorityFound = true;
+			readyList.current = readyList.first;
+		} */
 		readyList.current = readyList.first;
 		return priorityFound;
 	}
 	else
-		return 1;
+		return false;
 }
 
 void LowLevelScheduler::decrementIO(){
 	if (blockedList.first != NULL) {
-		if (blockedList.current->getPCB->returnIOCounter())
+		if (blockedList.current->getPCB->returnIOCounter()) {
 			blockedList.current->getPCB->decrementIOCounter();
+		}
+		else {
+			blockedList.current->getPCB->decIOLeft();
+			blockedToReady(blockedList.current->getPCB);
+		}
 	}
 }
