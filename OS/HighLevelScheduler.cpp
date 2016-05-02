@@ -5,7 +5,6 @@
 
 #include "HighLevelScheduler.h"
 #include "StateMachine.h"
-#include "PCB.h"
 #include<fstream>
 #include<istream>
 #include<string>
@@ -20,34 +19,36 @@ int poolIoLevel; // Averaged integer rating of entire pool's level of I/O utiliz
 int poolCount; // Number of processes in the pool (i.e. those in ready,running,blocked)
 int PID; // ID of process being considered for admission
 
-/*extern listStruct newList;
-extern listStruct readyList;
-extern listStruct runningList;
-extern listStruct blockedList;
-extern listStruct doneList;*/
-
 // Gets current pool count
 int gatherPool()
 {
-	// Grab current processes in each state
-	/*extern listStruct newList;
-	extern listStruct readyList;
-	extern listStruct runningList;
-	extern listStruct blockedList;
-	extern listStruct doneList;*/
 
 	// Calculate the total number of processes in the pool (those in ready, running, blocked)
-	poolCount = sizeof(readyList) + sizeof(runningList) + sizeof(blockedList);
+	poolCount = sizeofList(readyList) + sizeofList(runningList) + sizeofList(blockedList);
 	return poolCount;
+}
+
+int sizeofList(listStruct list) {
+	int sizecount = 0;
+	if (list.current != NULL) {
+		sizecount++;
+		while (list.current->next != NULL) {
+			sizecount++;
+			list.current = list.current->next;
+		}
+	}
+	list.current = list.first;
+	return sizecount;
 }
 
 // Gathers current pool I/O level
 int gatherPoolIoLevel()
 {
 	// Tally the total number of I/O requests in ready
-	int readySize = sizeof(readyList);
+	int readySize = sizeofList(readyList);
 	int readyTotal = 0;
-	for(int i=0; i<readySize; i++)
+
+	for (int i = 0; i < readySize; i++)
 	{
 		readyTotal = readyTotal + readyList.current->getPCB->returnIOLeft();
 		readyList.current = readyList.current->next;
@@ -55,7 +56,7 @@ int gatherPoolIoLevel()
 	readyList.current = readyList.first; // Reset pointer
 
 	// Tally the total number of I/O requests in running
-	int runningSize = sizeof(runningList);
+	int runningSize = sizeofList(runningList);
 	int runningTotal = 0;
 	for(int i=0; i<runningSize; i++)
 	{
@@ -65,7 +66,7 @@ int gatherPoolIoLevel()
 	runningList.current = runningList.first; // Reset pointer
 
 	// Tally the total number of IO requests in blocked
-	int blockedSize = sizeof(blockedList);
+	int blockedSize = sizeofList(blockedList);
 	int blockedTotal = 0;
 	for(int i=0; i<blockedSize; i++)
 	{
@@ -77,7 +78,14 @@ int gatherPoolIoLevel()
 	// Calculate poolIoLevel
 	int poolTotal = readyTotal + runningTotal + blockedTotal;
 	int poolMax = (readySize + runningSize + blockedSize) * 5;
-	poolIoLevel = floor(poolTotal/poolMax) * 100;
+	if (poolMax != 0)
+	{
+		poolIoLevel = floor(poolTotal / poolMax) * 100;
+
+	}
+	else{
+		poolIoLevel = 0;
+	}
 	return poolIoLevel;
 }
 
@@ -85,8 +93,8 @@ int gatherPoolIoLevel()
 int gatherProcessIoLevel()
 {
 	// Match PID with PCB ID, then pull number of I/O request
-	int rawIo;
-	for (int i=0; i<sizeof(newList); i++)
+	int rawIo = 0;
+	for (int i=0; i<sizeofList(newList); i++)
 	{
 		if(PID == newList.current->getPCB->returnId())
 		{
@@ -112,12 +120,17 @@ bool decideAdmitNewJob()
 	if (poolCount >= 50)
 	{
 		newJobAdmissionStatus = false;
+		// cout << "newJobAdmissionStatus: " + std::to_string(newJobAdmissionStatus) + "\n"; // DEBUG
 	}
 
 	if (poolCount < 50)
 	{
 		int tempPoolIoLevel = 0;
-		tempPoolIoLevel = floor(((poolIoLevel + processIoLevel) / (poolCount + 1)));
+		tempPoolIoLevel = floor(((poolIoLevel + processIoLevel) / (poolCount + 1) / ((poolCount+1)*100)));
+		cout << "pool io level is " + std::to_string(poolIoLevel) + "\n";
+		cout << "process io level is:" + std::to_string(processIoLevel) + "\n";
+		cout << "pool count is: " + std::to_string(poolCount) + "\n";
+		cout << "temp pool io level:" + std::to_string(tempPoolIoLevel) + "\n";
 		if (tempPoolIoLevel < 50)
 		{
 			newJobAdmissionStatus = true;
@@ -129,8 +142,8 @@ bool decideAdmitNewJob()
 	}
     // If there is not enough memory for the process then set newJobAdmissionStatus = false
     // Match PID with PCB ID, then pull number of I/O request
-    bool memory;
-    for (int i=0; i<sizeof(newList); i++)
+    bool memory = false;
+    for (int i=0; i<sizeofList(newList); i++)
     {
         if(PID == newList.current->getPCB->returnId())
         {
@@ -143,6 +156,7 @@ bool decideAdmitNewJob()
             newList.current = newList.current->next;
         }
     }
+	cout << "Memory conclusion is: " + std::to_string(memory) + "\n";
     newList.current = newList.first; // Reset pointer
     if(memory == false)
     {
@@ -155,9 +169,10 @@ bool decideAdmitNewJob()
 // Admits a new job when applicable
 void admitJob()
 {
+	cout << "admission status when admitting job is: " + std::to_string(newJobAdmissionStatus) + "\n";
 	if (newJobAdmissionStatus == true)
 	{
-		for (int i=0; i<sizeof(newList); i++)
+		for (int i=0; i<sizeofList(newList); i++)
 		{
 			if(PID == newList.current->getPCB->returnId())
 			{
@@ -183,4 +198,11 @@ void highMain(int processID)
 	gatherProcessIoLevel();
 	decideAdmitNewJob();
 	admitJob();
+
+	// DEBUGS
+	cout << "Admission Status: " + std::to_string(newJobAdmissionStatus) + "\n";
+	cout << "processIoLevel: " + std::to_string(processIoLevel) + "\n";
+	cout << "poolIoLevel: " + std::to_string(poolIoLevel) + "\n";
+	cout << "poolCount: " + std::to_string(poolCount) + "\n";
+	cout << "PID: " + std::to_string(PID) + "\n";
 }
