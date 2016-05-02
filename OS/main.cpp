@@ -29,7 +29,8 @@ LowLevelScheduler lowlevel = LowLevelScheduler();
 using namespace std;
 
 void runFunc();
-//void printstuff();
+void printstuff();
+int sizeofList2(listStruct);
 
 int main(void){ //main function - the OS simulator
 	//initialization
@@ -41,10 +42,9 @@ int main(void){ //main function - the OS simulator
 		//run
 		lowlevel.decrementIO();
 		runFunc();              //timeslice?
-		/*if (statechange) {
-			//brett's output code
-		}*/
-
+		if (statechange) {
+			printstuff();
+		}
 		// All under loop indicating change in state machine 
 		
 	}
@@ -52,6 +52,8 @@ int main(void){ //main function - the OS simulator
 }
 
 void printstuff() {
+	system("cls");
+
 	// All under loop indicating change in state machine 
 	// State Change Flag
 	bool stateChange = false; //fix to take value from Brian
@@ -66,15 +68,16 @@ void printstuff() {
 	cout << "---------------------------------------------------------------------------------------------------------------------------------" << endl;
 	cout << " " << "\t" << 8 << "\t" << " " << "\t" << 9 << "\t" << "|" << "\t" << 10 << "\t" << " " << "\t" << 11 << "\t" << " " << "\t" << 12 << "\t" << "|" << "\t" << 13 << "\t" << " " << "\t" << 14 << "\t" << " " << "\t" << 15 << "\t" << " " << endl;
 
+	cout << "\n" << "\n" << "\n";
 
 	/////////////////////////////Print out of process in each state
 	// Print New
 	cout << "New" << endl;
-	int newSize = sizeof(newList);
+	int newSize = sizeofList2(newList);
 	string newPrint = "";
 	for (int i = 0; i < newSize; i++)
 	{
-		string newPrint = newPrint + "," + std::to_string(newList.current->getPCB->returnId());
+		newPrint = newPrint + "|" + std::to_string(newList.current->getPCB->returnId());
 		newList.current = newList.current->next;
 	}
 	newList.current = newList.first; // Reset pointer
@@ -83,11 +86,11 @@ void printstuff() {
 
 	// Print Ready
 	cout << "Ready" << endl;
-	int readySize = sizeof(readyList);
-	string readyPrint;
+	int readySize = sizeofList2(readyList);
+	string readyPrint="";
 	for (int i = 0; i < readySize; i++)
 	{
-		string readyPrint = readyPrint + "," + std::to_string(readyList.current->getPCB->returnId());
+		readyPrint = readyPrint + "|" + std::to_string(readyList.current->getPCB->returnId());
 		readyList.current = readyList.current->next;
 	}
 	readyList.current = readyList.first; // Reset pointer
@@ -96,11 +99,11 @@ void printstuff() {
 
 	// Print Running
 	cout << "Running" << endl;
-	int runningSize = sizeof(runningList);
-	string runningPrint;
+	int runningSize = sizeofList2(runningList);
+	string runningPrint="";
 	for (int i = 0; i < runningSize; i++)
 	{
-		string runningPrint = runningPrint + "," + std::to_string(runningList.current->getPCB->returnId());
+		runningPrint = runningPrint + "|" + std::to_string(runningList.current->getPCB->returnId());
 		runningList.current = runningList.current->next;
 	}
 	runningList.current = runningList.first; // Reset pointer
@@ -109,11 +112,11 @@ void printstuff() {
 
 	// Print Blocked
 	cout << "Blocked" << endl;
-	int blockedSize = sizeof(blockedList);
-	string blockedPrint;
+	int blockedSize = sizeofList2(blockedList);
+	string blockedPrint="";
 	for (int i = 0; i < blockedSize; i++)
 	{
-		string blockedPrint = blockedPrint + "," + std::to_string(blockedList.current->getPCB->returnId());
+		blockedPrint = blockedPrint + "|" + std::to_string(blockedList.current->getPCB->returnId());
 		blockedList.current = blockedList.current->next;
 	}
 	blockedList.current = blockedList.first; // Reset pointer
@@ -122,11 +125,11 @@ void printstuff() {
 
 	// Print Exit
 	cout << "Exit" << endl;
-	int doneSize = sizeof(doneList);
-	string donePrint;
+	int doneSize = sizeofList2(doneList);
+	string donePrint="";
 	for (int i = 0; i < doneSize; i++)
 	{
-		string donePrint = donePrint + "," + std::to_string(doneList.current->getPCB->returnId());
+		donePrint = donePrint + "|" + std::to_string(doneList.current->getPCB->returnId());
 		doneList.current = doneList.current->next;
 	}
 	doneList.current = doneList.first; // Reset pointer
@@ -137,9 +140,9 @@ void printstuff() {
 	//////////////////////////// Print info for active processes
 
 	// Print Headers
-	cout << "ID" << endl;
-	cout << "\tCPU" << endl;
-	cout << "\t\tIO" << endl;
+	cout << "ID";
+	cout << "\tCPU";
+	cout << "\t\tIO";
 	cout << "\t\t\tPriority" << endl;
 
 
@@ -155,10 +158,10 @@ void printstuff() {
 		string priority = std::to_string(readyList.current->getPCB->returnPriority());
 
 		// Print process data
-		cout << ID << endl;
-		cout << "\t" + cpuCompleted + "/" + cpuTotal << endl;
-		cout << "\t\t" + IOCompleted + "/" + IOTotal << endl;
-		cout << "\t\t\t" + priority << endl;
+		cout << ID;
+		cout << "\t" << cpuCompleted << "/" << cpuTotal;
+		cout << "\t\t" << IOCompleted << "/" << IOTotal;
+		cout << "\t\t\t" << priority << endl;
 	}
 	readyList.current = readyList.first; // Reset pointer
 
@@ -174,10 +177,10 @@ void printstuff() {
 		string priority = std::to_string(runningList.current->getPCB->returnPriority());
 
 		// Print process data
-		cout << ID << endl;
-		cout << "\t" + cpuCompleted + "/" + cpuTotal << endl;
-		cout << "\t\t" + IOCompleted + "/" + IOTotal << endl;
-		cout << "\t\t\t" + priority << endl;
+		cout << ID;
+		cout << "\t" << cpuCompleted << "/" << cpuTotal;
+		cout << "\t\t" << IOCompleted << "/" << IOTotal;
+		cout << "\t\t\t" << priority << endl;
 	}
 	runningList.current = runningList.first; // Reset pointer
 
@@ -191,12 +194,12 @@ void printstuff() {
 		string IOTotal = std::to_string(blockedList.current->getPCB->returnIO());
 		string IOCompleted = std::to_string(blockedList.current->getPCB->returnIOLeft());
 		string priority = std::to_string(blockedList.current->getPCB->returnPriority());
-
+		
 		// Print process data
-		cout << ID << endl;
-		cout << "\t" + cpuCompleted + "/" + cpuTotal << endl;
-		cout << "\t\t" + IOCompleted + "/" + IOTotal << endl;
-		cout << "\t\t\t" + priority << endl;
+		cout << ID;
+		cout << "\t" << cpuCompleted << "/" << cpuTotal;
+		cout << "\t\t" << IOCompleted << "/" << IOTotal;
+		cout << "\t\t\t" << priority << endl;
 	}
 	blockedList.current = blockedList.first; // Reset pointer	
 
@@ -213,21 +216,16 @@ void printstuff() {
 	// Step
 	if (stateChange == true && sleep == false)
 	{
-		// clear screen
-		system("cls");
-
 		// update
 		// wait for enter
 		cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 		// finish iteration of main
 	}
-
+	
+	/*
 	// Sleep
 	if (stateChange == false && step == true)
 	{
-		// clear screen
-		system("cls");
-
 		//update
 		//wait for tab
 		cin.ignore(std::numeric_limits<streamsize>::max(), '\t');
@@ -237,6 +235,20 @@ void printstuff() {
 		while (clock() < wait) {};
 		//finish main
 	}
+	*/
+}
+
+int sizeofList2(listStruct list) {
+	int sizecount = 0;
+	if (list.current != NULL) {
+		sizecount++;
+		while (list.current->next != NULL) {
+			sizecount++;
+			list.current = list.current->next;
+		}
+	}
+	list.current = list.first;
+	return sizecount;
 }
 
 void runFunc() {
