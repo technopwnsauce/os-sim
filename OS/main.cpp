@@ -19,34 +19,48 @@ listStruct readyList = { NULL, NULL, NULL };
 listStruct blockedList = { NULL, NULL, NULL };
 listStruct runningList = { NULL, NULL, NULL };
 listStruct doneList = { NULL, NULL, NULL };
-bool done = 0;
 bool statechange = 0;
 int idmax = 0;
 PageTable pTable;
-bool memory[MEMSIZE] = { true };
+bool memory[MEMSIZE] = { true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true};
 LowLevelScheduler lowlevel = LowLevelScheduler();
  
 using namespace std;
 
+void highMain(int);
 void runFunc();
 void printstuff();
 int sizeofList2(listStruct);
+listProcess *tempproc = NULL;
 
 int main(void){ //main function - the OS simulator
 	//initialization
+	bool done = 0;
+	srand(time(NULL));
+	clock_t hold;
 	initFile();
 	while (!done) {
 		processInitializer();//Watch the skipping new problem
 		//highlevelscheduler
-		
-		//run
+		if (newList.first != NULL) {
+			tempproc = newList.first;
+			while (tempproc != NULL) {
+				highMain(tempproc->id);
+				tempproc = tempproc->next;
+			}
+			tempproc = newList.first;
+		}
+								   //run
 		lowlevel.decrementIO();
 		runFunc();              //timeslice?
 		if (statechange) {
 			printstuff();
+			//hold = clock() + 1*CLOCKS_PER_SEC;
+			//cout << &readyList.current->next << endl;
+		//	while (clock() < hold) {};
 		}
 		// All under loop indicating change in state machine 
-		
+		statechange = 0;
 	}
 	return 0;
 }
@@ -147,7 +161,8 @@ void printstuff() {
 
 
 	// Print ready
-	for (int i = 0; i < doneSize; i++)
+	readySize = sizeofList2(readyList);
+	for (int i = 0; i < readySize; i++)
 	{
 		// Gather process data
 		string ID = std::to_string(readyList.current->getPCB->returnId());
@@ -162,11 +177,15 @@ void printstuff() {
 		cout << "\t" << cpuCompleted << "/" << cpuTotal;
 		cout << "\t\t" << IOCompleted << "/" << IOTotal;
 		cout << "\t\t\t" << priority << endl;
+
+		// Increment
+		readyList.current =  readyList.current->next;
 	}
 	readyList.current = readyList.first; // Reset pointer
 
-										 // Print running
-	for (int i = 0; i < doneSize; i++)
+	// Print running
+	runningSize = sizeofList2(runningList);
+	for (int i = 0; i < runningSize; i++)
 	{
 		// Gather process data
 		string ID = std::to_string(runningList.current->getPCB->returnId());
@@ -181,11 +200,14 @@ void printstuff() {
 		cout << "\t" << cpuCompleted << "/" << cpuTotal;
 		cout << "\t\t" << IOCompleted << "/" << IOTotal;
 		cout << "\t\t\t" << priority << endl;
+
+		// Increment
+		runningList.current = runningList.current->next;
 	}
 	runningList.current = runningList.first; // Reset pointer
 
-											 // Print blocked
-	for (int i = 0; i < doneSize; i++)
+	blockedSize = sizeofList2(blockedList);										 // Print blocked
+	for (int i = 0; i < blockedSize; i++)
 	{
 		// Gather process data
 		string ID = std::to_string(blockedList.current->getPCB->returnId());
@@ -200,42 +222,49 @@ void printstuff() {
 		cout << "\t" << cpuCompleted << "/" << cpuTotal;
 		cout << "\t\t" << IOCompleted << "/" << IOTotal;
 		cout << "\t\t\t" << priority << endl;
+
+		// Increment
+		blockedList.current = blockedList.current->next;
 	}
 	blockedList.current = blockedList.first; // Reset pointer	
 
 
 
-											 ///////////////////////////////Print flags
-
-											 // Step Flag
-	bool step = true;
+///////////////////////////////Print flags
 
 	// Sleep Flag
-	bool sleep = false;
+	static bool sleep = false;
 
 	// Step
-	if (stateChange == true && sleep == false)
+	if (sleep == false)
 	{
-		// update
+	
+		// check for change in sleep tab
+		string temp;
+		temp = cin.get();
+		if (temp == "\t")
+		{
+			sleep = true;
+			cin.clear();
+		}
+		
+		else if (temp == "\n"){}
+
+		else while(1) {};
+
+		/*
 		// wait for enter
 		cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 		// finish iteration of main
+		*/
 	}
-	
-	/*
-	// Sleep
-	if (stateChange == false && step == true)
+
+	if (sleep == true)
 	{
-		//update
-		//wait for tab
-		cin.ignore(std::numeric_limits<streamsize>::max(), '\t');
-		//sleep for 3 seconds
 		clock_t wait;
-		wait = clock() + 3 * CLOCKS_PER_SEC;
+		wait = clock() + 2 * CLOCKS_PER_SEC;
 		while (clock() < wait) {};
-		//finish main
 	}
-	*/
 }
 
 int sizeofList2(listStruct list) {
@@ -258,17 +287,21 @@ void runFunc() {
 	else
 	{
 		runningList.first->getPCB->decTime();
+		runningList.first->getPCB->decTSlice();
 		if (!(runningList.first->getPCB->returnTimeLeft())) {
 			runningToEnd(runningList.first->getPCB);
 			lowlevel.runProcess();
 		}
-		if ((runningList.first->getPCB->returnTimeLeft() + 1) == runningList.first->ioList[runningList.first->getPCB->returnIO() - runningList.first->getPCB->returnIOLeft()][0]) {
-			runningList.first->getPCB->countIO(runningList.first->ioList[runningList.first->getPCB->returnIO() - runningList.first->getPCB->returnIOLeft()][1]);
-			runningToBlocked(runningList.first->getPCB);
-			lowlevel.runProcess();
+		else{
+			if (runningList.first->getPCB->returnTimeSlice() == 0) {
+				runningToReady(runningList.first->getPCB);
+				lowlevel.runProcess();
+			}
+			else if ((runningList.first->getPCB->returnTimeLeft() + 1) == runningList.first->ioList[runningList.first->getPCB->returnIO() - runningList.first->getPCB->returnIOLeft()][1]) {
+				runningList.first->getPCB->countIO(runningList.first->ioList[runningList.first->getPCB->returnIO() - runningList.first->getPCB->returnIOLeft()][0]);
+				runningToBlocked(runningList.first->getPCB);
+				lowlevel.runProcess();
+			}
 		}
 	}
-	//if(runningList.first) TIME SLICING
-
-
 }

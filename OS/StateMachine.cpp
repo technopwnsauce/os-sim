@@ -2,7 +2,6 @@
 #include <iostream>
 #include "PCB.h" 
 #include "StateMachine.h"
-#include "HighLevelScheduler.h"
 #include<fstream>
 #include<istream>
 #include<string>
@@ -25,11 +24,13 @@ int i1 = 0;
 int i = 0;
 int swapio = 0;
 
+
 void initFile() {
 	ifstream processFile;
 	processFile.open("processFile.txt");
 	if (processFile.is_open()) {
 		while (processFile) {
+			if (processFile.eof()) break;
 			processFile >> getEntrypoint;
 			processFile >> getSize;
 			processFile >> getIOnumber;
@@ -72,17 +73,17 @@ void initializePCB() {
 	tempIndex->next = NULL;
 	tempIndex->getPCB = tempPCB;
 	for (i = 0; i < preState.current->ionumber; i++) {
-		tempIndex->ioList[i][1] = ((rand() % 25) + 25);
+		tempIndex->ioList[i][0] = ((rand() % 25) + 25);
 	}
 	for (i = 0; i < preState.current->ionumber; i++) {
-		tempIndex->ioList[i][1] = ((rand() % tempIndex->getPCB->returnTotalTime()));
+		tempIndex->ioList[i][1] = ((rand() % (tempIndex->getPCB->returnTotalTime())));
 	}
-	for(i1 = 0; i1 < preState.current->ionumber-1; i1++){
+	for(i1 = 0; i1 < preState.current->ionumber; i1++){
 		for (i = 0; i < preState.current->ionumber - 1; i++) {
-			if (tempIndex->ioList[i] < tempIndex->ioList[i + 1]) {
-				swapio = tempIndex->ioList[i][0];
-				tempIndex->ioList[i][0] = tempIndex->ioList[i + 1][0];
-				tempIndex->ioList[i + 1][0] = swapio;
+			if (tempIndex->ioList[i][1] < tempIndex->ioList[i + 1][1]) {
+				swapio = tempIndex->ioList[i][1];
+				tempIndex->ioList[i][1] = tempIndex->ioList[i + 1][1];
+				tempIndex->ioList[i + 1][1] = swapio;
 			}
 		}
 	}
@@ -97,7 +98,6 @@ void initializePCB() {
 		newList.last->next = tempIndex;
 		newList.last = tempIndex;
 	}
-	highMain(newList.last->id);//bretts shit
 }
 
 void deleteElement() {
@@ -281,6 +281,7 @@ void blockedToReady(PCB *Process) {                           //Blocked->Ready
 void runningToEnd(PCB *Process) {                             //Running->End
 	Process->assignState(endstate);
 	processTransferMain(&runningList, &doneList, Process);
+	Process->clearMem();
 }
 
 void printList(listStruct * oldStruct, listStruct * newStruct) {                         //This is a useful debug function which prints lists. Can be modified

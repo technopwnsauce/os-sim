@@ -19,7 +19,7 @@ bool decideAdmitNewJob();
 
 void admitJob();
 
-void highMain(int processID);
+void highMain(int);
 
 
 

@@ -79,6 +79,14 @@ int PCB::returnIOCounter() {
 	return this->ioCounter;
 }
 
+int PCB::returnTimeSlice() {
+	return this->info.timeSlice;
+}
+
+void PCB::setTimeSlice(int timeslice) {
+	this->info.timeSlice = TIMESLICE;
+}
+
 void PCB::setIO(int setio) {
 	this->io = setio;
 	this->ioLeft = setio;
@@ -90,6 +98,14 @@ void PCB::decTime() {
 
 void PCB::decrementIOCounter() {
 	this->ioCounter -= 1;
+}
+
+void PCB::decTSlice() {
+	this->info.timeSlice--;
+}
+
+void PCB::decIOLeft() {
+	this->ioLeft--;
 }
 
 bool PCB::checkMem(){
@@ -125,7 +141,7 @@ void PCB::clearMem(){
 bool PCB::checkMemLeft() {
 	int count = 0;
 	for (int i = 0; i < MEMSIZE; i++) {
-		if (memory[i] == false) count++;
+		if (memory[i] == true) count++;
 	}
 	if (this->processSize <= count) {
 		return true;
